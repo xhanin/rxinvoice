@@ -1,0 +1,12 @@
+title: Find user by key 20130720 2326
+given:
+  - time: 2013-07-20T23:26:44.758+02:00
+  - collection: users
+    data: |
+        { "name" : "john" , "email" : "johndoe@acme.com" , "roles" : [ "customer"] , "_id" : { "$oid" : "51eb000d6bc81390eda1887a"}}
+wts:
+  - when: |
+       GET users/51eb000d6bc81390eda1887a
+       Cookie: RestxSession={"_expires":"2013-08-19T23:26:44.758+02:00","principal":"admin","sessionKey":"ea04362a-0e1f-4d55-b625-062c9c96e951"}; RestxSessionSignature=EANgwB/w1dsEPsKTbeaLDTEY8+A=
+    then: |
+        {"name":"john","email":"johndoe@acme.com","roles":["customer"],"_id":"51eb000d6bc81390eda1887a"}

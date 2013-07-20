@@ -1,0 +1,14 @@
+title: Update user 20130720 2328
+given:
+  - time: 2013-07-20T23:28:22.020+02:00
+  - collection: users
+    data: |
+        { "name" : "john" , "email" : "johndoe@acme.com" , "roles" : [ "customer"] , "_id" : { "$oid" : "51eb00bd6bc81390eda1887b"}}
+wts:
+  - when: |
+       PUT users/51eb00bd6bc81390eda1887b
+       Cookie: RestxSession={"_expires":"2013-08-19T23:28:22.020+02:00","principal":"admin","sessionKey":"ea04362a-0e1f-4d55-b625-062c9c96e951"}; RestxSessionSignature=FIo+Va8O5Xzv/fcGh/U7dFfqE3w=
+
+        {"name":"johndoe","email":"john.doe@acme.com","roles":["customer"],"_id":"51eb00bd6bc81390eda1887b"}
+    then: |
+        {"name":"johndoe","email":"john.doe@acme.com","roles":["customer"],"_id":"51eb00bd6bc81390eda1887b"}
