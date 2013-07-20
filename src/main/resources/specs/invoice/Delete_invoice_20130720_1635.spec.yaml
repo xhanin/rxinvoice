@@ -1,0 +1,13 @@
+title: Delete invoice 20130720 1635
+given:
+  - time: 2013-07-20T16:35:15.098+02:00
+  - collection: invoices
+    data: |
+        { "reference" : "12346" , "date" : { "$date" : "2013-07-18T22:00:00.000Z"} , "status" : "DRAFT" , "emitter" : { "name" : "Xavier Hanin" , "address" : { "body" : "111, av du truc" , "zipCode" : "33700" , "city" : "Merignac"}} , "recipient" : { "name" : "ACME Inc" , "address" : { "body" : "1122, pooder st" , "zipCode" : "12345 CA" , "city" : "Palo Alto"}} , "grossAmount" : 10025 , "vats" : [ ] , "netAmount" : 11960 , "lines" : [ ] , "_id" : { "$oid" : "51ea98b06bc86553b820f7e2"}}
+        { "reference" : "12345" , "date" : { "$date" : "2013-07-18T22:00:00.000Z"} , "status" : "DRAFT" , "emitter" : { "name" : "Xavier Hanin" , "address" : { "body" : "111, av du truc" , "zipCode" : "33700" , "city" : "Merignac"}} , "recipient" : { "name" : "ACME Inc" , "address" : { "body" : "1122, pooder st" , "zipCode" : "12345 CA" , "city" : "Palo Alto"}} , "grossAmount" : 10025 , "vats" : [ ] , "netAmount" : 11960 , "lines" : [ ] , "_id" : { "$oid" : "51ea9fac6bc89255aef4c74c"}}
+wts:
+  - when: |
+       DELETE invoices/51ea9fac6bc89255aef4c74c
+       Cookie: RestxSession={"_expires":"2013-08-19T16:35:15.098+02:00","principal":"admin","sessionKey":"ea04362a-0e1f-4d55-b625-062c9c96e951"}; RestxSessionSignature=uiC3KVLrlmoo+UaF8p05DJU94HM=
+    then: |
+        {"status":"deleted"}

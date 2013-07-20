@@ -1,0 +1,12 @@
+title: Find invoices 20130720 1600
+given:
+  - time: 2013-07-20T16:00:15.403+02:00
+  - collection: invoices
+    data: |
+
+wts:
+  - when: |
+       GET invoices
+       Cookie: RestxSession={"_expires":"2013-08-19T16:00:15.403+02:00","principal":"admin","sessionKey":"ea04362a-0e1f-4d55-b625-062c9c96e951"}; RestxSessionSignature=BGIIZ8jtzdenHV5187fsma5czbs=
+    then: |
+        []

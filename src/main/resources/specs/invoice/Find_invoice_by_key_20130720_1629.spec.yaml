@@ -1,0 +1,12 @@
+title: Find invoice by key 20130720 1629
+given:
+  - time: 2013-07-20T16:29:38.226+02:00
+  - collection: invoices
+    data: |
+        { "reference" : "12345" , "date" : { "$date" : "2013-07-19T22:00:00.000Z"} , "status" : "DRAFT" , "emitter" : { "name" : "Xavier Hanin" , "address" : { "body" : "111, av du truc" , "zipCode" : "33700" , "city" : "Merignac"}} , "recipient" : { "name" : "ACME Inc" , "address" : { "body" : "1122, pooder st" , "zipCode" : "12345 CA" , "city" : "Palo Alto"}} , "grossAmount" : 10025 , "vats" : [ ] , "netAmount" : 11960 , "lines" : [ ] , "_id" : { "$oid" : "51ea98b06bc86553b820f7e2"}}
+wts:
+  - when: |
+       GET invoices/51ea98b06bc86553b820f7e2
+       Cookie: RestxSession={"_expires":"2013-08-19T16:29:38.226+02:00","principal":"admin","sessionKey":"ea04362a-0e1f-4d55-b625-062c9c96e951"}; RestxSessionSignature=v2MmiA56p6qQMDK344nt4feUtO0=
+    then: |
+        {"reference":"12345","date":"2013-07-19","status":"DRAFT","emitter":{"name":"Xavier Hanin","address":{"body":"111, av du truc","zipCode":"33700","city":"Merignac"}},"recipient":{"name":"ACME Inc","address":{"body":"1122, pooder st","zipCode":"12345 CA","city":"Palo Alto"}},"grossAmount":100.25,"vats":[],"netAmount":119.6,"lines":[],"_id":"51ea98b06bc86553b820f7e2"}
