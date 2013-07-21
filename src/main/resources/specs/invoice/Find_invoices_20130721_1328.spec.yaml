@@ -1,0 +1,19 @@
+title: Find invoices 20130721 1328
+given:
+  - time: 2013-07-21T13:28:25.294+02:00
+  - collection: users
+    data: |
+        { "name" : "jane" , "email" : "janedoe@acme.com" , "roles" : [ "buyer"] , "companyRef" : "51ebab006bc8e48ffeaacc93" , "_id" : { "$oid" : "51eb03cf6bc83c47b76508cd"}}
+        { "name" : "john" , "email" : "johndoe@acme.com" , "roles" : [ "seller"] , "companyRef" : "51eba5766bc8e48ffeaacc89" , "_id" : { "$oid" : "51eba5a86bc8e48ffeaacc8c"}}
+        { "name" : "jack" , "email" : "jackdoe@acme.com" , "roles" : [ "seller"] , "companyRef" : "51ebc3a66bc8db077d9454f1" , "_id" : { "$oid" : "51ebc3bb6bc8db077d9454f2"}}
+  - collection: invoices
+    data: |
+        { "reference" : "12345" , "date" : { "$date" : "2013-07-17T22:00:00.000Z"} , "status" : "DRAFT" , "emitter" : { "name" : "Xavier Hanin" , "address" : { "body" : "111, av du truc" , "zipCode" : "33700" , "city" : "Merignac"}} , "recipient" : { "name" : "ACME Inc" , "address" : { "body" : "1122, pooder st" , "zipCode" : "12345 CA" , "city" : "Palo Alto"}} , "grossAmount" : 10025 , "vats" : [ ] , "netAmount" : 11960 , "lines" : [ ] , "_id" : { "$oid" : "51ea98b06bc86553b820f7e2"}}
+        { "seller" : { "name" : "FooBar" , "address" : { "body" : "118, av du truc" , "zipCode" : "33700" , "city" : "Merignac"} , "_id" : { "$oid" : "51ebc3a66bc8db077d9454f1"}} , "grossAmount" :  null  , "vats" : [ ] , "netAmount" :  null  , "lines" : [ ] , "_id" : { "$oid" : "51ebc3fb6bc8db077d9454f3"}}
+        { "reference" : "1234567" , "date" : { "$date" : "2013-07-20T22:00:00.000Z"} , "status" : "SENT" , "seller" : { "name" : "Xavier Hanin" , "address" : { "body" : "113, av du truc" , "zipCode" : "33700" , "city" : "Merignac"} , "_id" : { "$oid" : "51eba5766bc8e48ffeaacc89"}} , "buyer" : { "name" : "ACME Inc" , "address" : { "body" : "1122, pooder st" , "zipCode" : "12345 CA" , "city" : "Palo Alto"} , "_id" : { "$oid" : "51ebab006bc8e48ffeaacc93"}} , "grossAmount" : 10000 , "vats" : [ ] , "netAmount" : 10000 , "lines" : [ ] , "_id" : { "$oid" : "51ebc0d46bc8e48ffeaacca4"}}
+wts:
+  - when: |
+       GET invoices
+       Cookie: RestxSession={"_expires":"2013-08-20T13:28:25.294+02:00","principal":"jane","sessionKey":"7c3a055d-49b0-422e-8406-d9eec7fa79b6"}; RestxSessionSignature=zEW+Vofv7qgJlLGSgOrLEQCzMD4=
+    then: |
+        [{"reference":"1234567","date":"2013-07-20","status":"SENT","seller":{"name":"Xavier Hanin","address":{"body":"113, av du truc","zipCode":"33700","city":"Merignac"},"_id":"51eba5766bc8e48ffeaacc89"},"buyer":{"name":"ACME Inc","address":{"body":"1122, pooder st","zipCode":"12345 CA","city":"Palo Alto"},"_id":"51ebab006bc8e48ffeaacc93"},"grossAmount":100,"vats":[],"netAmount":100,"lines":[],"_id":"51ebc0d46bc8e48ffeaacca4"}]

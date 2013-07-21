@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.ImmutableSet;
 import org.jongo.marshall.jackson.oid.Id;
 import org.jongo.marshall.jackson.oid.ObjectId;
+import restx.exceptions.ErrorCode;
+import restx.exceptions.ErrorField;
 import restx.security.RestxPrincipal;
 
 import java.util.Collection;
@@ -17,6 +19,8 @@ public class User implements RestxPrincipal {
     private String name;
     private String email;
     private Collection<String> roles;
+
+    private String companyRef;
 
     public String getKey() {
         return key;
@@ -32,6 +36,10 @@ public class User implements RestxPrincipal {
 
     public Collection<String> getRoles() {
         return roles;
+    }
+
+    public String getCompanyRef() {
+        return companyRef;
     }
 
     @Override @JsonIgnore
@@ -59,4 +67,31 @@ public class User implements RestxPrincipal {
         return this;
     }
 
+    public User setCompanyRef(final String companyRef) {
+        this.companyRef = companyRef;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "key='" + key + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", roles=" + roles +
+                ", companyRef='" + companyRef + '\'' +
+                '}';
+    }
+
+    public static class Rules {
+        @ErrorCode(code = "USER-001", description = "must have a company")
+        public static enum CompanyRef {
+            @ErrorField("user key") KEY
+        }
+        @ErrorCode(code = "USER-002", description = "must have valid company - provided company key not found")
+        public static enum ValidCompanyRef {
+            @ErrorField("user key") KEY,
+            @ErrorField("company ref") COMPANY_REF
+        }
+    }
 }

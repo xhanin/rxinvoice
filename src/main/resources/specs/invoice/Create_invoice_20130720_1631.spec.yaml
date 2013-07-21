@@ -6,7 +6,7 @@ wts:
        POST invoices
        Cookie: RestxSession={"_expires":"2013-08-19T16:31:35.885+02:00","principal":"admin","sessionKey":"ea04362a-0e1f-4d55-b625-062c9c96e951"}; RestxSessionSignature=U2vPRPBmcL9skcN/DsEz/BnLVsM=
 
-        [{"reference":"12346","date":"2013-07-19","status":"DRAFT","emitter":{"name":"Xavier Hanin","address":{"body":"111, av du truc","zipCode":"33700","city":"Merignac"}},"recipient":{"name":"ACME Inc","address":{"body":"1122, pooder st","zipCode":"12345 CA","city":"Palo Alto"}},"grossAmount":100.25,"vats":[],"netAmount":119.6,"lines":[],"_id":"51ea98b06bc86553b820f7e2"}]
+        [{"reference":"12346","date":"2013-07-19","status":"DRAFT","seller":{"name":"Xavier Hanin","address":{"body":"111, av du truc","zipCode":"33700","city":"Merignac"}},"buyer":{"name":"ACME Inc","address":{"body":"1122, pooder st","zipCode":"12345 CA","city":"Palo Alto"}},"grossAmount":100.25,"vats":[],"netAmount":119.6,"lines":[],"_id":"51ea98b06bc86553b820f7e2"}]
     then: |
        400
 

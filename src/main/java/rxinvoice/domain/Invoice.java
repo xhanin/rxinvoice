@@ -19,8 +19,8 @@ public class Invoice {
     private DateMidnight date;
     private Status status;
 
-    private Company emitter;
-    private Company recipient;
+    private Company seller;
+    private Company buyer;
 
     @FixedPrecision(2)
     private BigDecimal grossAmount;
@@ -46,12 +46,12 @@ public class Invoice {
         return status;
     }
 
-    public Company getEmitter() {
-        return emitter;
+    public Company getSeller() {
+        return seller;
     }
 
-    public Company getRecipient() {
-        return recipient;
+    public Company getBuyer() {
+        return buyer;
     }
 
     public BigDecimal getGrossAmount() {
@@ -90,13 +90,13 @@ public class Invoice {
         return this;
     }
 
-    public Invoice setEmitter(final Company emitter) {
-        this.emitter = emitter;
+    public Invoice setSeller(final Company seller) {
+        this.seller = seller;
         return this;
     }
 
-    public Invoice setRecipient(final Company recipient) {
-        this.recipient = recipient;
+    public Invoice setBuyer(final Company buyer) {
+        this.buyer = buyer;
         return this;
     }
 
@@ -127,8 +127,8 @@ public class Invoice {
                 ", reference='" + reference + '\'' +
                 ", date=" + date +
                 ", status=" + status +
-                ", emitter=" + emitter +
-                ", recipient=" + recipient +
+                ", emitter=" + seller +
+                ", recipient=" + buyer +
                 ", grossAmount=" + grossAmount +
                 ", vats=" + vats +
                 ", netAmount=" + netAmount +

@@ -18,6 +18,17 @@ import javax.inject.Named;
 
 @Module
 public class AppModule {
+    public static User currentUser() {
+        return (User) RestxSession.current().getPrincipal().get();
+    }
+
+    public static final class Roles {
+        // we don't use an enum here because roles in @RolesAllowed have to be constant strings
+        public static final String ADMIN = "admin";
+        public static final String SELLER = "seller";
+        public static final String BUYER = "buyer";
+    }
+
     @Provides
     public SignatureKey signatureKey() {
          return new SignatureKey(

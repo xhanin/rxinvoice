@@ -1,0 +1,19 @@
+title: Create company 20130721 1110
+given:
+  - time: 2013-07-21T11:10:14.254+02:00
+  - collection: users
+    data: |
+        { "name" : "johndoe" , "email" : "john.doe@acme.com" , "roles" : [ "customer"] , "_id" : { "$oid" : "51eb00bd6bc81390eda1887b"}}
+        { "name" : "jane" , "email" : "janedoe@acme.com" , "roles" : [ "customer"] , "_id" : { "$oid" : "51eb03cf6bc83c47b76508cd"}}
+  - collection: companies
+    data: |
+
+    sequence: 51eba5766bc8e48ffeaacc89
+wts:
+  - when: |
+       POST companies
+       Cookie: RestxSession={"_expires":"2013-08-20T11:10:14.254+02:00","principal":"admin","sessionKey":"7c3a055d-49b0-422e-8406-d9eec7fa79b6"}; RestxSessionSignature=eGfw6Oh7Bg5NnEKJIieFGnwduk0=
+
+        {"name":"Xavier Hanin","address":{"body":"111, av du truc","zipCode":"33700","city":"Merignac"}}
+    then: |
+        {"name":"Xavier Hanin","address":{"body":"111, av du truc","zipCode":"33700","city":"Merignac"},"_id":"51eba5766bc8e48ffeaacc89"}
