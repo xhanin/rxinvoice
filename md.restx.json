@@ -21,6 +21,9 @@
             "org.mindrot:jbcrypt:0.3m",
             "ch.qos.logback:logback-classic:1.0.9"
         ],
+        "runtime": [
+            "io.restx:restx-barbarywatch:${restx.version}"
+        ],
         "test": [
             "io.restx:restx-specs-tests:${restx.version}",
             "io.restx:restx-jongo-specs-tests:${restx.version}",
