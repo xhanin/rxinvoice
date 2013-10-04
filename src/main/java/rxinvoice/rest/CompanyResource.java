@@ -1,6 +1,8 @@
 package rxinvoice.rest;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Lists;
 import org.bson.types.ObjectId;
 import restx.HttpStatus;
 import restx.Status;
@@ -16,6 +18,9 @@ import rxinvoice.persistence.CompanyRepository;
 
 import javax.inject.Named;
 
+import java.util.Collection;
+
+import static com.google.common.collect.Lists.newArrayList;
 import static restx.common.MorePreconditions.checkEquals;
 import static rxinvoice.AppModule.Roles.ADMIN;
 import static rxinvoice.AppModule.Roles.SELLER;
@@ -32,8 +37,8 @@ public class CompanyResource {
 
     @RolesAllowed({ADMIN, SELLER})
     @GET("/companies")
-    public Iterable<Company> findCompanies() {
-        return companies.findCompanies();
+    public Collection<Company> findCompanies() {
+        return ImmutableList.copyOf(companies.findCompanies());
     }
 
     @GET("/companies/{key}")
