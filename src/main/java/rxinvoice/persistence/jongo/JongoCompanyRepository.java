@@ -24,7 +24,7 @@ import static rxinvoice.AppModule.Roles.SELLER;
 
 /**
  */
-@Component
+@Component @When(name = "persistence", value = "jongo")
 public class JongoCompanyRepository implements CompanyRepository {
     private final JongoCollection companies;
 

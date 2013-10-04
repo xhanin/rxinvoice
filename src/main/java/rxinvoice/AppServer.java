@@ -26,6 +26,7 @@ public class AppServer {
          */
         System.setProperty("restx.mode", System.getProperty("restx.mode", "dev"));
         System.setProperty("restx.app.package", "rxinvoice");
+        System.setProperty("persistence", System.getProperty("persistence", "jdbi"));
 
         server.startAndAwait();
     }
