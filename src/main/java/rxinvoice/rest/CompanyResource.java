@@ -12,6 +12,7 @@ import restx.security.RolesAllowed;
 import rxinvoice.AppModule;
 import rxinvoice.domain.Company;
 import rxinvoice.domain.User;
+import rxinvoice.persistence.CompanyRepository;
 
 import javax.inject.Named;
 
@@ -23,16 +24,16 @@ import static rxinvoice.AppModule.Roles.SELLER;
  */
 @Component @RestxResource
 public class CompanyResource {
-    private final JongoCollection companies;
+    private final CompanyRepository companies;
 
-    public CompanyResource(@Named("companies") JongoCollection companies) {
+    public CompanyResource(CompanyRepository companies) {
         this.companies = companies;
     }
 
     @RolesAllowed({ADMIN, SELLER})
     @GET("/companies")
     public Iterable<Company> findCompanies() {
-        return companies.get().find().as(Company.class);
+        return companies.findCompanies();
     }
 
     @GET("/companies/{key}")
@@ -45,30 +46,26 @@ public class CompanyResource {
             throw new WebException(HttpStatus.FORBIDDEN);
         }
 
-        return Optional.fromNullable(companies.get().findOne(new ObjectId(key)).as(Company.class));
+        return companies.findCompanyByKey(key);
     }
 
     @RolesAllowed(ADMIN)
     @POST("/companies")
     public Company createCompany(Company company) {
-        companies.get().save(company);
-        return company;
+        return companies.createCompany(company);
     }
 
     @RolesAllowed(ADMIN)
     @PUT("/companies/{key}")
     public Company updateCompany(String key, Company company) {
         checkEquals("key", key, "company.key", company.getKey());
-        companies.get().save(company);
-        return company;
+        return companies.updateCompany(company);
     }
 
     @RolesAllowed(ADMIN)
     @DELETE("/companies/{key}")
     public Status deleteCompany(String key) {
-        // TODO check that company is not referenced by users
-
-        companies.get().remove(new ObjectId(key));
+        companies.deleteCompany(key);
         return Status.of("deleted");
     }
 

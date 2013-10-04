@@ -12,6 +12,7 @@ import restx.security.BasicPrincipalAuthenticator;
 import restx.security.RestxPrincipal;
 import restx.security.RestxSession;
 import rxinvoice.domain.User;
+import rxinvoice.persistence.UserRepository;
 import rxinvoice.rest.UserResource;
 
 import javax.inject.Named;
@@ -43,11 +44,11 @@ public class AppModule {
 
     @Provides
     public BasicPrincipalAuthenticator basicPrincipalAuthenticator(
-            final UserResource userResource) {
+            final UserRepository userRepository) {
         return new BasicPrincipalAuthenticator() {
             @Override
             public Optional<? extends RestxPrincipal> findByName(String name) {
-                return userResource.findUserByName(name);
+                return userRepository.findUserByName(name);
             }
 
             @Override
@@ -55,7 +56,7 @@ public class AppModule {
                     String name, String passwordHash, ImmutableMap<String, ?> principalData) {
                 boolean rememberMe = Boolean.valueOf((String) principalData.get("rememberMe"));
 
-                Optional<User> u = userResource.findAndCheckCredentials(name, passwordHash);
+                Optional<User> u = userRepository.findAndCheckCredentials(name, passwordHash);
                 if (u.isPresent()) {
                     RestxSession.current().expires(rememberMe ? Duration.standardDays(30) : Duration.ZERO);
                 }
