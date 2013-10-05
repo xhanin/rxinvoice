@@ -1,7 +1,10 @@
 package rxinvoice.domain;
 
+import javax.persistence.Embeddable;
+
 /**
  */
+@Embeddable
 public class Address {
     private String body;
     private String zipCode;

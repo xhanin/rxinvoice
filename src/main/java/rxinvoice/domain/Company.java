@@ -3,14 +3,19 @@ package rxinvoice.domain;
 import org.jongo.marshall.jackson.oid.Id;
 import org.jongo.marshall.jackson.oid.ObjectId;
 
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+
 /**
  */
+@Entity
 public class Company {
-    @Id @ObjectId
+    @Id @ObjectId @javax.persistence.Id
     private String key;
 
     private String name;
 
+    @Embedded
     private Address address;
 
     public String getKey() {

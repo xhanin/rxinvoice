@@ -26,6 +26,8 @@
         <dependency org="org.mindrot" name="jbcrypt" rev="0.3m" conf="default" />
         <dependency org="com.h2database" name="h2" rev="1.3.173" conf="default" />
         <dependency org="org.jdbi" name="jdbi" rev="2.50" conf="default" />
+        <dependency org="org.hibernate" name="hibernate-core" rev="4.2.6.Final" conf="default" />
+        <dependency org="org.hibernate" name="hibernate-entitymanager" rev="4.2.6.Final" conf="default" />
         <dependency org="ch.qos.logback" name="logback-classic" rev="1.0.9" conf="default" />
         <dependency org="io.restx" name="restx-barbarywatch" rev="0.2.9.1" conf="runtime->default" />
         <dependency org="io.restx" name="restx-specs-tests" rev="0.2.9.1" conf="test->default" />
