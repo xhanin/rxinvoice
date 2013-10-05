@@ -23,6 +23,7 @@
             "org.jdbi:jdbi:2.50",
             "org.hibernate:hibernate-core:4.2.6.Final",
             "org.hibernate:hibernate-entitymanager:4.2.6.Final",
+            "org.neo4j:neo4j:2.0.0-M05",
             "ch.qos.logback:logback-classic:1.0.9"
         ],
         "runtime": [
