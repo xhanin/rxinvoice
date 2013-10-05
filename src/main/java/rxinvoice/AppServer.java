@@ -26,7 +26,7 @@ public class AppServer {
          */
         System.setProperty("restx.mode", System.getProperty("restx.mode", "dev"));
         System.setProperty("restx.app.package", "rxinvoice");
-        System.setProperty("persistence", System.getProperty("persistence", "neo4j"));
+        System.setProperty("persistence", System.getProperty("persistence", "j8ser"));
 
         server.startAndAwait();
     }
