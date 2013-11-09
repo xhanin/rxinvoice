@@ -12,4 +12,4 @@ wts:
        DELETE users/51eb000d6bc81390eda1887a
        Cookie: RestxSession={"_expires":"2013-08-19T23:27:01.166+02:00","principal":"admin","sessionKey":"ea04362a-0e1f-4d55-b625-062c9c96e951"}; RestxSessionSignature=RJdcwxMjcIBxY1zgbmeuEUeAMnY=
     then: |
-        {"status":"deleted"}
+        204

@@ -90,11 +90,10 @@ public class UserResource {
 
     @RolesAllowed(ADMIN)
     @DELETE("/users/{key}")
-    public Status deleteUser(String key) {
+    public void deleteUser(String key) {
         ObjectId id = new ObjectId(key);
         users.get().remove(id);
         usersCredentials.get().remove("{ userRef: # }", id);
-        return Status.of("deleted");
     }
 
     @PUT("/users/{userKey}/credentials")
