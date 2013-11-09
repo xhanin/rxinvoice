@@ -4,7 +4,7 @@ import com.google.common.base.Optional;
 import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.mindrot.jbcrypt.BCrypt;
-import restx.HttpStatus;
+import restx.http.HttpStatus;
 import restx.Status;
 import restx.WebException;
 import restx.annotations.*;
@@ -22,9 +22,7 @@ import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static restx.common.MorePreconditions.checkEquals;
-import static rxinvoice.AppModule.Roles.ADMIN;
-import static rxinvoice.AppModule.Roles.BUYER;
-import static rxinvoice.AppModule.Roles.SELLER;
+import static rxinvoice.AppModule.Roles.*;
 
 /**
  */

@@ -4,7 +4,7 @@ import com.google.common.base.Optional;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import restx.HttpStatus;
+import restx.http.HttpStatus;
 import restx.Status;
 import restx.WebException;
 import restx.annotations.*;

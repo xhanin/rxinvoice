@@ -4,7 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import org.joda.time.Duration;
-import restx.SignatureKey;
+import restx.security.SignatureKey;
 import restx.factory.Module;
 import restx.factory.Provides;
 import restx.jongo.JongoFactory;

@@ -2,7 +2,7 @@ package rxinvoice.rest;
 
 import com.google.common.base.Optional;
 import org.bson.types.ObjectId;
-import restx.HttpStatus;
+import restx.http.HttpStatus;
 import restx.Status;
 import restx.WebException;
 import restx.annotations.*;
