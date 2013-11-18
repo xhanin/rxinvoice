@@ -4,10 +4,10 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableMap;
 import org.joda.time.Duration;
+import restx.mongo.MongoModule;
 import restx.security.SignatureKey;
 import restx.factory.Module;
 import restx.factory.Provides;
-import restx.jongo.JongoFactory;
 import restx.security.BasicPrincipalAuthenticator;
 import restx.security.RestxPrincipal;
 import restx.security.RestxSession;
@@ -36,7 +36,7 @@ public class AppModule {
                          .getBytes(Charsets.UTF_8));
     }
 
-    @Provides @Named(JongoFactory.JONGO_DB_NAME)
+    @Provides @Named(MongoModule.MONGO_DB_NAME)
     public String dbName() {
         return "rxinvoice";
     }
