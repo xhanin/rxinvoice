@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 import org.bson.types.ObjectId;
 import org.joda.time.DateTime;
 import org.mindrot.jbcrypt.BCrypt;
+import restx.exceptions.RestxErrors;
 import restx.http.HttpStatus;
 import restx.Status;
 import restx.WebException;
@@ -31,6 +32,7 @@ public class UserResource {
     private final JongoCollection users;
     private final JongoCollection usersCredentials;
     private final String adminPasswordHash;
+    private final RestxErrors errors;
     private final CompanyResource companyResource;
 
     private final User defaultAdminUser = new User()
@@ -41,10 +43,12 @@ public class UserResource {
     public UserResource(@Named("users") JongoCollection users,
                         @Named("usersCredentials") JongoCollection usersCredentials,
                         @Named("restx.admin.passwordHash") final String adminPasswordHash,
+                        RestxErrors errors,
                         CompanyResource companyResource) {
         this.users = users;
         this.usersCredentials = usersCredentials;
         this.adminPasswordHash = adminPasswordHash;
+        this.errors = errors;
         this.companyResource = companyResource;
     }
 
@@ -120,12 +124,12 @@ public class UserResource {
     private void checkUserRules(User user) {
         if (user.getPrincipalRoles().contains(SELLER) || user.getPrincipalRoles().contains(BUYER)) {
             if (user.getCompanyRef() == null) {
-                throw RestxError.on(User.Rules.CompanyRef.class)
+                throw errors.on(User.Rules.CompanyRef.class)
                         .set(User.Rules.CompanyRef.KEY, user.getKey())
                         .raise();
             }
             if (!companyResource.findCompanyByKey(user.getCompanyRef()).isPresent()) {
-                throw RestxError.on(User.Rules.ValidCompanyRef.class)
+                throw errors.on(User.Rules.ValidCompanyRef.class)
                         .set(User.Rules.ValidCompanyRef.KEY, user.getKey())
                         .set(User.Rules.ValidCompanyRef.COMPANY_REF, user.getCompanyRef())
                         .raise();
