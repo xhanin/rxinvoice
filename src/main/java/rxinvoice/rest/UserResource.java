@@ -13,6 +13,7 @@ import restx.exceptions.RestxError;
 import restx.factory.Component;
 import restx.jongo.JongoCollection;
 import restx.security.RolesAllowed;
+import restx.security.UserRepository;
 import rxinvoice.AppModule;
 import rxinvoice.domain.User;
 import rxinvoice.domain.UserCredentials;
@@ -28,26 +29,23 @@ import static rxinvoice.AppModule.Roles.*;
 /**
  */
 @Component @RestxResource
-public class UserResource {
-    private final JongoCollection users;
-    private final JongoCollection usersCredentials;
-    private final String adminPasswordHash;
-    private final RestxErrors errors;
-    private final CompanyResource companyResource;
-
-    private final User defaultAdminUser = new User()
+public class UserResource implements UserRepository<User> {
+    public static final User defaultAdminUser = new User()
             .setKey(new ObjectId().toString())
             .setName("admin")
             .setRoles(Arrays.asList(ADMIN, "restx-admin"));
 
+    private final JongoCollection users;
+    private final JongoCollection usersCredentials;
+    private final RestxErrors errors;
+    private final CompanyResource companyResource;
+
     public UserResource(@Named("users") JongoCollection users,
                         @Named("usersCredentials") JongoCollection usersCredentials,
-                        @Named("restx.admin.passwordHash") final String adminPasswordHash,
                         RestxErrors errors,
                         CompanyResource companyResource) {
         this.users = users;
         this.usersCredentials = usersCredentials;
-        this.adminPasswordHash = adminPasswordHash;
         this.errors = errors;
         this.companyResource = companyResource;
     }
@@ -82,14 +80,21 @@ public class UserResource {
     }
 
     public Optional<User> findUserByName(String name) {
-        Optional<User> user = Optional.fromNullable(users.get().findOne("{name: #}", name).as(User.class));
-        if (!user.isPresent()
-                && "admin".equals(name)
-                && !isAdminDefined()) {
-            // use in memory admin user as long as no user with admin role is defined in DB
-            return Optional.of(defaultAdminUser);
+        return Optional.fromNullable(users.get().findOne("{name: #}", name).as(User.class));
+    }
+
+    @Override
+    public Optional<String> findCredentialByUserName(String name) {
+        Optional<User> userByName = findUserByName(name);
+        if (!userByName.isPresent()) {
+            return Optional.absent();
         }
-        return user;
+        UserCredentials c = findCredentialsForUserKey(userByName.get().getKey());
+        if (c == null) {
+            return Optional.absent();
+        }
+
+        return Optional.fromNullable(c.getPasswordHash());
     }
 
     @RolesAllowed(ADMIN)
@@ -145,38 +150,22 @@ public class UserResource {
         }
     }
 
-    public Optional<User> findAndCheckCredentials(String name, String passwordHash) {
-        Optional<User> user = findUserByName(name);
-        if (!user.isPresent()) {
-            return Optional.absent();
-        }
-
-        UserCredentials credentials = findCredentialsForUserKey(user.get().getKey());
-
-        if (credentials == null) {
-            if ("admin".equals(name)) {
-                // allow admin log in with config password as long as it is not defined in DB
-                if (adminPasswordHash.equals(passwordHash)) {
-                    return user;
-                }
-            }
-
-            return Optional.absent();
-        }
-
-        if (BCrypt.checkpw(passwordHash, credentials.getPasswordHash())) {
-            return user;
-        } else {
-            return Optional.absent();
-        }
-    }
-
     private UserCredentials findCredentialsForUserKey(String userKey) {
         return usersCredentials.get()
                 .findOne("{ userRef: # }", new ObjectId(userKey)).as(UserCredentials.class);
     }
 
-    private boolean isAdminDefined() {
-        return users.get().count("{roles: {$all: [ # ]}}", ADMIN) > 0;
+    @Override
+    public boolean isAdminDefined() {
+        try {
+            return users.get().count("{roles: {$all: [ # ]}}", ADMIN) > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public User defaultAdmin() {
+        return defaultAdminUser;
     }
 }
