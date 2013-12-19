@@ -1,9 +1,6 @@
 package rxinvoice;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableMap;
-import org.joda.time.Duration;
 import restx.mongo.MongoModule;
 import restx.security.*;
 import restx.factory.Module;
@@ -43,6 +40,6 @@ public class AppModule {
             UserResource userResource, SecuritySettings securitySettings,
             @Named("restx.admin.passwordHash") String adminPasswordHash) {
         return new StdBasicPrincipalAuthenticator(
-                new StdUserService<>(userResource, new BCryptCredentialsChecker(), adminPasswordHash), securitySettings);
+                new StdUserService<>(userResource, new BCryptCredentialsStrategy(), adminPasswordHash), securitySettings);
     }
 }
