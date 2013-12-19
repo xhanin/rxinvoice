@@ -6,6 +6,7 @@ import restx.security.*;
 import restx.factory.Module;
 import restx.factory.Provides;
 import rxinvoice.domain.User;
+import rxinvoice.rest.AppUserRepository;
 import rxinvoice.rest.UserResource;
 
 import javax.inject.Named;
@@ -36,10 +37,16 @@ public class AppModule {
     }
 
     @Provides
+    public CredentialsStrategy credentialsStrategy() {
+        return new BCryptCredentialsStrategy();
+    }
+
+    @Provides
     public BasicPrincipalAuthenticator basicPrincipalAuthenticator(
-            UserResource userResource, SecuritySettings securitySettings,
+            AppUserRepository userRepository, SecuritySettings securitySettings,
+            CredentialsStrategy credentialsStrategy,
             @Named("restx.admin.passwordHash") String adminPasswordHash) {
         return new StdBasicPrincipalAuthenticator(
-                new StdUserService<>(userResource, new BCryptCredentialsStrategy(), adminPasswordHash), securitySettings);
+                new StdUserService<>(userRepository, credentialsStrategy, adminPasswordHash), securitySettings);
     }
 }
