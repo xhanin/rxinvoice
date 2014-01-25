@@ -1,6 +1,7 @@
 package rxinvoice;
 
 import com.google.common.base.Charsets;
+import restx.i18n.SupportedLocale;
 import restx.mongo.MongoModule;
 import restx.security.*;
 import restx.factory.Module;
@@ -10,6 +11,7 @@ import rxinvoice.rest.AppUserRepository;
 import rxinvoice.rest.UserResource;
 
 import javax.inject.Named;
+import java.util.Locale;
 
 @Module
 public class AppModule {
@@ -39,6 +41,11 @@ public class AppModule {
     @Provides @Named("restx.app.package")
     public String appPackage() {
         return "rxinvoice";
+    }
+
+    @Provides @Named("FR")
+    public SupportedLocale french() {
+        return new SupportedLocale(Locale.FRENCH);
     }
 
     @Provides
