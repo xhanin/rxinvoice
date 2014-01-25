@@ -36,6 +36,11 @@ public class AppModule {
         return "rxinvoice";
     }
 
+    @Provides @Named("restx.app.package")
+    public String appPackage() {
+        return "rxinvoice";
+    }
+
     @Provides
     public CredentialsStrategy credentialsStrategy() {
         return new BCryptCredentialsStrategy();
