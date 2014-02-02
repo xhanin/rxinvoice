@@ -17,9 +17,11 @@
         <dependency org="io.restx" name="restx-core" rev="latest.integration" conf="default" />
         <dependency org="io.restx" name="restx-core-annotation-processor" rev="latest.integration" conf="default" />
         <dependency org="io.restx" name="restx-factory" rev="latest.integration" conf="default" />
+        <dependency org="io.restx" name="restx-i18n" rev="latest.integration" conf="default" />
         <dependency org="io.restx" name="restx-jongo" rev="latest.integration" conf="default" />
         <dependency org="io.restx" name="restx-factory-admin" rev="latest.integration" conf="default" />
         <dependency org="io.restx" name="restx-monitor-admin" rev="latest.integration" conf="default" />
+        <dependency org="io.restx" name="restx-i18n-admin" rev="latest.integration" conf="default" />
         <dependency org="io.restx" name="restx-log-admin" rev="latest.integration" conf="default" />
         <dependency org="io.restx" name="restx-server-jetty" rev="latest.integration" conf="default" />
         <dependency org="io.restx" name="restx-apidocs" rev="latest.integration" conf="default" />

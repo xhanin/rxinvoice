@@ -34,6 +34,11 @@
         </dependency>
         <dependency>
             <groupId>io.restx</groupId>
+            <artifactId>restx-i18n</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
             <artifactId>restx-jongo</artifactId>
             <version>${restx.version}</version>
         </dependency>
@@ -45,6 +50,11 @@
         <dependency>
             <groupId>io.restx</groupId>
             <artifactId>restx-monitor-admin</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-i18n-admin</artifactId>
             <version>${restx.version}</version>
         </dependency>
         <dependency>
