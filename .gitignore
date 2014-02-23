@@ -1,5 +1,5 @@
 .idea
-rxinvoice.iml
-logs/*
+*.iml
+*.log
 target
 tmp
