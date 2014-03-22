@@ -20,8 +20,7 @@
         <dependency org="io.restx" name="restx-jongo" rev="0.31" conf="default" />
         <dependency org="io.restx" name="restx-factory-admin" rev="0.31" conf="default" />
         <dependency org="io.restx" name="restx-monitor-admin" rev="0.31" conf="default" />
-        <dependency org="io.restx" name="restx-log-admin" rev="0.31" conf="default" />
-        <dependency org="io.restx" name="restx-server-jetty" rev="0.31" conf="default" />
+        <dependency org="io.restx" name="restx-server-simple" rev="0.31" conf="default" />
         <dependency org="io.restx" name="restx-apidocs" rev="0.31" conf="default" />
         <dependency org="io.restx" name="restx-specs-admin" rev="0.31" conf="default" />
         <dependency org="org.mindrot" name="jbcrypt" rev="0.3m" conf="default" />
